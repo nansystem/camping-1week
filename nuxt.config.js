@@ -3,6 +3,10 @@ import pkg from './package'
 export default {
   mode: 'universal',
 
+  env: {
+    baseUrl: process.env.BASE_URL || 'http://localhost:3000'
+  },
+
   /*
    ** Headers of the page
    */
@@ -68,7 +72,10 @@ export default {
           enforce: 'pre',
           test: /\.(js|vue)$/,
           loader: 'eslint-loader',
-          exclude: /(node_modules)/
+          exclude: /(node_modules)/,
+          options: {
+            fix: true,
+          },
         })
       }
     }
