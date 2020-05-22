@@ -72,9 +72,6 @@ export default {
     // See https://github.com/nuxt-community/axios-module#options
   },
 
-  /*
-   ** Build configuration
-   */
   build: {
     postcss: {
       preset: {
@@ -87,6 +84,14 @@ export default {
      ** You can extend webpack config here
      */
     extend(config, ctx) {
+
+      if (ctx.isServer) {
+        config.externals = {
+          '@firebase/app': 'commonjs @firebase/app',
+          '@firebase/firestore': 'commonjs @firebase/firestore',
+        }
+      }
+
       // Run ESLint on save
       if (ctx.isDev && ctx.isClient) {
         config.module.rules.push({
