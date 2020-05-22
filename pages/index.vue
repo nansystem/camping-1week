@@ -10,8 +10,6 @@
 </template>
 
 <script>
-// import firebase from '@/plugins/firebase'
-// import Logo from '~/components/Logo.vue'
 import Card from '~/components/Card.vue'
 import Navi from '~/components/Nav.vue'
 
@@ -27,48 +25,7 @@ export default {
     displayName() {
       return this.$store.getters['user/displayName']
     }
-  },
-  mounted() {
-    console.info("index.vue mounted process.env.apiKey:", process.env.apiKey)
-    const firebase = require('firebase')
-
-    if (!firebase.apps.length) {
-      const firebaseConfig = {
-        apiKey: process.env.apiKey,
-        authDomain: process.env.authDomain,
-        databaseURL: process.env.databaseURL,
-        projectId: process.env.projectId,
-        storageBucket: process.env.storageBucket,
-        messagingSenderId: process.env.messagingSenderId,
-        appId: process.env.appId,
-        measurementId: process.env.measurementId
-      }
-      firebase.initializeApp(firebaseConfig)
-    }
-
-    firebase.auth().onAuthStateChanged(user => {
-      this.$store.dispatch('user/login', user)
-    })
   }
-  // mounted: function() {
-  //   firebase.auth().onAuthStateChanged(user => {
-  //     console.log(user)
-  //     if (user) {
-  //       this.isLogin = true
-  //       this.userData = user
-  //     } else {
-  //       this.isLogin = false
-  //       this.userData = null
-  //     }
-  //   })
-  // },
-  // methods: {
-  //   twitterLogin: function() {
-  //     firebase
-  //       .auth()
-  //       .signInWithRedirect(new firebase.auth.TwitterAuthProvider())
-  //   }
-  // }
 }
 </script>
 

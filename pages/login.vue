@@ -3,9 +3,10 @@
 </template>
 
 <script>
+import firebase from '@/plugins/firebase'
+
 export default {
   mounted() {
-    const firebase = require('firebase')
     const firebaseui = require('firebaseui')
     require('firebaseui/dist/firebaseui.css')
 
@@ -21,26 +22,8 @@ export default {
         // firebase.auth.PhoneAuthProvider.PROVIDER_ID
       ]
     }
-    if (!firebase.apps.length) {
-      const firebaseConfig = {
-        apiKey: process.env.apiKey,
-        authDomain: process.env.authDomain,
-        databaseURL: process.env.databaseURL,
-        projectId: process.env.projectId,
-        storageBucket: process.env.storageBucket,
-        messagingSenderId: process.env.messagingSenderId,
-        appId: process.env.appId,
-        measurementId: process.env.measurementId
-      }
-      firebase.initializeApp(firebaseConfig)
-    }
-
     const ui = new firebaseui.auth.AuthUI(firebase.auth())
     ui.start('#firebaseui-auth-container', uiConfig)
-
-    firebase.auth().onAuthStateChanged(user => {
-      this.$store.dispatch('user/login', user)
-    })
   }
 }
 </script>

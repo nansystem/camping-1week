@@ -43,13 +43,13 @@
           <a @click="logout">ログアウト</a>
         </div>
       </div>
-      <!--
--->
     </div>
   </nav>
 </template>
 
 <script>
+import firebase from '@/plugins/firebase'
+
 export default {
   data() {
     return { burgerVisibillity: false }
@@ -59,31 +59,9 @@ export default {
       return this.$store.getters['user/isLogin']
     }
   },
-  mounted() {
-    const firebase = require('firebase')
-
-    if (!firebase.apps.length) {
-      const firebaseConfig = {
-        apiKey: process.env.apiKey,
-        authDomain: process.env.authDomain,
-        databaseURL: process.env.databaseURL,
-        projectId: process.env.projectId,
-        storageBucket: process.env.storageBucket,
-        messagingSenderId: process.env.messagingSenderId,
-        appId: process.env.appId,
-        measurementId: process.env.measurementId
-      }
-      firebase.initializeApp(firebaseConfig)
-    }
-
-    firebase.auth().onAuthStateChanged(user => {
-      this.$store.dispatch('user/login', user)
-    })
-  },
   methods: {
     logout() {
       this.$store.dispatch('user/logout')
-      const firebase = require('firebase')
       firebase
         .auth()
         .signOut()

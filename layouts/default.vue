@@ -53,3 +53,19 @@
   background-color: #35495e;
 } */
 </style>
+
+<script>
+import firebase from '@/plugins/firebase'
+
+export default {
+  mounted: function() {
+    firebase.auth().onAuthStateChanged(user => {
+      if (user) {
+        this.$store.dispatch('user/login', user)
+      } else {
+        this.$store.dispatch('user/logout', user)
+      }
+    })
+  }
+}
+</script>

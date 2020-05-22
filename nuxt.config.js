@@ -4,7 +4,6 @@ export default {
   mode: 'universal',
 
   env: {
-    baseUrl: process.env.BASE_URL || 'http://localhost:3000',
     apiKey: process.env.API_KEY,
     authDomain: process.env.AUTH_DOMAIN,
     databaseURL: process.env.DATABASE_URL,
