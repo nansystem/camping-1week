@@ -5,7 +5,7 @@
 </template>
 
 <style>
-html {
+/* html {
   font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI',
     Roboto, 'Helvetica Neue', Arial, sans-serif;
   font-size: 16px;
@@ -51,5 +51,21 @@ html {
 .button--grey:hover {
   color: #fff;
   background-color: #35495e;
-}
+} */
 </style>
+
+<script>
+import firebase from '@/plugins/firebase'
+
+export default {
+  mounted: function() {
+    firebase.auth().onAuthStateChanged(user => {
+      if (user) {
+        this.$store.dispatch('user/login', user)
+      } else {
+        this.$store.dispatch('user/logout', user)
+      }
+    })
+  }
+}
+</script>

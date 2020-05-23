@@ -3,6 +3,17 @@ import pkg from './package'
 export default {
   mode: 'universal',
 
+  env: {
+    apiKey: process.env.API_KEY,
+    authDomain: process.env.AUTH_DOMAIN,
+    databaseURL: process.env.DATABASE_URL,
+    projectId: process.env.PROJECT_ID,
+    storageBucket: process.env.STORAGE_BUCKET,
+    messagingSenderId: process.env.MESSAGING_SENDER_ID,
+    appId: process.env.APP_ID,
+    measurementId: process.env.MEASUREMENT_ID,
+  },
+
   /*
    ** Headers of the page
    */
@@ -38,8 +49,22 @@ export default {
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
     // Doc:https://github.com/nuxt-community/modules/tree/master/packages/bulma
-    '@nuxtjs/bulma'
+    '@nuxtjs/bulma',
   ],
+
+  // buildModules: [
+  //   '@nuxtjs/fontawesome',
+  // ],
+
+  // fontawesome: {
+  //   component: 'fa',
+  //   // suffix: true,
+  //   icons: {
+  //     solid: ['fas'],
+  //     brands: ['fab'],
+  //   }
+  // },
+
   /*
    ** Axios module configuration
    */
@@ -47,9 +72,6 @@ export default {
     // See https://github.com/nuxt-community/axios-module#options
   },
 
-  /*
-   ** Build configuration
-   */
   build: {
     postcss: {
       preset: {
@@ -62,13 +84,24 @@ export default {
      ** You can extend webpack config here
      */
     extend(config, ctx) {
+
+      if (ctx.isServer) {
+        config.externals = {
+          '@firebase/app': 'commonjs @firebase/app',
+          '@firebase/firestore': 'commonjs @firebase/firestore',
+        }
+      }
+
       // Run ESLint on save
       if (ctx.isDev && ctx.isClient) {
         config.module.rules.push({
           enforce: 'pre',
           test: /\.(js|vue)$/,
           loader: 'eslint-loader',
-          exclude: /(node_modules)/
+          exclude: /(node_modules)/,
+          options: {
+            fix: true,
+          },
         })
       }
     }

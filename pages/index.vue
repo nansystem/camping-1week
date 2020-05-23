@@ -1,34 +1,34 @@
 <template>
-  <section class="container">
-    <div>
-      <logo />
-      <h1 class="title">
-        camping-1week
-      </h1>
-      <h2 class="subtitle">
-        My tiptop Nuxt.js project
-      </h2>
-      <div class="links">
-        <a href="https://nuxtjs.org/" target="_blank" class="button--green"
-          >Documentation</a
-        >
-        <a
-          href="https://github.com/nuxt/nuxt.js"
-          target="_blank"
-          class="button--grey"
-          >GitHub</a
-        >
-      </div>
-    </div>
-  </section>
+  <div>
+    <navi />
+    <main>
+      <card :recipe="recipe" v-for="(recipe, index) in list" :key="index" />
+    </main>
+  </div>
 </template>
 
 <script>
-import Logo from '~/components/Logo.vue'
+import Card from '~/components/Card.vue'
+import Navi from '~/components/Nav.vue'
 
 export default {
   components: {
-    Logo
+    Card,
+    Navi
+  },
+  computed: {
+    isLogin() {
+      return this.$store.getters['user/isLogin']
+    },
+    displayName() {
+      return this.$store.getters['user/displayName']
+    },
+    list() {
+      return this.$store.getters['recipe/list']
+    }
+  },
+  async fetch({ store, params }) {
+    await store.dispatch('recipe/listAll')
   }
 }
 </script>
