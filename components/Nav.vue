@@ -5,7 +5,7 @@
         <nuxt-link to="/">缶プ飯</nuxt-link>
       </div>
       <div v-if="isLogin" class="navbar-item">
-        <nuxt-link class="button is-primary" to="/login">
+        <nuxt-link class="button is-primary" to="/recipe/post">
           <strong>レシピ投稿</strong>
         </nuxt-link>
       </div>
@@ -27,11 +27,6 @@
         <span aria-hidden="true"></span>
         <span aria-hidden="true"></span>
       </div>
-      <!-- <div class="navbar-burger" data-target="navMenu">
-        <span aria-hidden="true"></span>
-        <span aria-hidden="true"></span>
-        <span aria-hidden="true"></span>
-      </div> -->
     </div>
     <div
       id="navMenu"

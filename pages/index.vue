@@ -2,9 +2,7 @@
   <div>
     <navi />
     <main>
-      <card />
-      <card />
-      <card />
+      <card :recipe="recipe" v-for="(recipe, index) in list" :key="index" />
     </main>
   </div>
 </template>
@@ -24,7 +22,13 @@ export default {
     },
     displayName() {
       return this.$store.getters['user/displayName']
+    },
+    list() {
+      return this.$store.getters['recipe/list']
     }
+  },
+  async fetch({ store, params }) {
+    await store.dispatch('recipe/listAll')
   }
 }
 </script>

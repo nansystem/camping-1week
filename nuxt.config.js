@@ -40,7 +40,8 @@ export default {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: [],
+  plugins: [
+  ],
 
   /*
    ** Nuxt.js modules
@@ -50,6 +51,7 @@ export default {
     '@nuxtjs/axios',
     // Doc:https://github.com/nuxt-community/modules/tree/master/packages/bulma
     '@nuxtjs/bulma',
+    // '@nuxtjs/dayjs',
   ],
 
   // buildModules: [
@@ -89,7 +91,7 @@ export default {
         config.externals = {
           '@firebase/app': 'commonjs @firebase/app',
           '@firebase/firestore': 'commonjs @firebase/firestore',
-        }
+}
       }
 
       // Run ESLint on save
