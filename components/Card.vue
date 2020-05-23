@@ -11,10 +11,18 @@
       </div>
       <div class="card-content" style="padding-top:8px;">
         <div class="content">
-          <p style="margin-bottom:0px;">ツナマヨ</p>
-          <span>by nancy</span>
+          <p style="margin-bottom:0px;">{{ recipe.title }}</p>
+          <span
+            >by {{ recipe.userName !== undefined ? recipe.userName : '' }}</span
+          >
         </div>
       </div>
     </div>
   </nuxt-link>
 </template>
+
+<script>
+export default {
+  props: ['recipe']
+}
+</script>

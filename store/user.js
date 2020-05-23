@@ -30,5 +30,11 @@ export const getters = {
   },
   displayName: state => {
     return state.displayName
+  },
+  user: state => {
+    return {
+      id: state.uid,
+      name: state.displayName
+    }
   }
 }
